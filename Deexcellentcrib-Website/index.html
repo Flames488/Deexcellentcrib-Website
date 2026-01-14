@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deexcellentcrib | Premium Interior Décor in Enugu, Nigeria</title>
+  <meta name="description" content="High-end interior décor and design services in Enugu. Transforming homes & offices with elegance and modern luxury.">
+  <meta name="keywords" content="interior design, home decor, Enugu interior, luxury design, furniture styling, renovation">
+  <meta name="author" content="Deexcellentcrib">
+  
+  <!-- Open Graph / Social Media -->
+  <meta property="og:title" content="Deexcellentcrib | Premium Interior Design">
+  <meta property="og:description" content="Transforming spaces in Enugu with elegant interior design">
+  <meta property="og:image" content="assets/images/hero-bg.jpg">
+  <meta property="og:url" content="https://deexcellentcrib.com">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/animations.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+  
+  <!-- Fonts -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  
+  <!-- Scripts -->
+  <script defer src="assets/js/main.js"></script>
+  <script defer src="assets/js/portfolio-filters.js"></script>
+  <script defer src="assets/js/animations.js"></script>
+  <script defer src="assets/js/contact-form.js"></script>
+  <script defer src="assets/js/chatbot.js"></script>
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "InteriorDesignBusiness",
+    "name": "Deexcellentcrib",
+    "description": "Premium interior design and decoration services in Enugu, Nigeria",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Enugu",
+      "addressRegion": "Enugu State",
+      "addressCountry": "NG"
+    },
+    "telephone": "+2348156792070",
+    "url": "https://deexcellentcrib.com"
+  }
+  </script>
+</head>
+<body>
+  <!-- Loading Screen -->
+  <div class="loading-screen">
+    <div class="loader"></div>
+  </div>
+
+  <!-- Chatbot Widget -->
+  <div class="chatbot-widget">
+    <button class="chatbot-toggle" aria-label="Open design consultation">
+      <i class="fas fa-robot"></i>
+    </button>
+    <div class="chatbot-container">
+      <div class="chatbot-header">
+        <h3>Design Assistant</h3>
+        <button class="close-chatbot" aria-label="Close chat">×</button>
+      </div>
+      <div class="chatbot-messages"></div>
+      <div class="chatbot-input">
+        <input type="text" placeholder="Ask about design styles or room ideas..." aria-label="Chat input">
+        <button aria-label="Send message"><i class="fas fa-paper-plane"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <header class="navbar">
+    <div class="container">
+      <div class="logo">
+        <a href="#">
+          <h1>Deexcellent<span class="gold">crib</span></h1>
+        </a>
+      </div>
+      <nav class="nav-menu" role="navigation" aria-label="Main Navigation">
+        <ul>
+          <li><a href="#home" class="nav-link active">Home</a></li>
+          <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+          <li><a href="#services" class="nav-link">Services</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#blog" class="nav-link">Inspiration</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="nav-actions">
+        <a href="https://wa.me/2348156792070" class="whatsapp-btn" target="_blank" aria-label="Chat on WhatsApp">
+          <i class="fab fa-whatsapp"></i> Chat Now
+        </a>
+        <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section with Video Background -->
+  <section id="home" class="hero" aria-label="Hero Section">
+    <div class="hero-video">
+      <video autoplay muted loop playsinline aria-hidden="true">
+        <source src="assets/videos/hero-video.mp4" type="video/mp4">
+        <source src="assets/videos/hero-video.webm" type="video/webm">
+      </video>
+      <div class="video-fallback" style="background-image: url('assets/images/hero-bg.jpg');"></div>
+    </div>
+    <div class="hero-overlay">
+      <div class="container">
+        <h2 class="animate-fade-up">Elegant Spaces, <span class="gold">Exceptional Living</span></h2>
+        <p class="hero-subtitle animate-fade-up" data-delay="200">Transforming homes & offices across Enugu with bespoke interior design</p>
+        <div class="hero-buttons animate-fade-up" data-delay="400">
+          <a href="#portfolio" class="btn btn-primary">View Our Work</a>
+          <a href="#contact" class="btn btn-outline">Book Consultation</a>
+        </div>
+        <div class="scroll-indicator" aria-label="Scroll down">
+          <i class="fas fa-chevron-down"></i>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio Section with Advanced Filters -->
+  <section id="portfolio" class="section portfolio-section" aria-label="Our Portfolio">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Our <span class="gold">Projects</span></h2>
+        <p class="section-subtitle">Explore our curated collection of transformation stories</p>
+      </div>
+      
+      <!-- AI Suggestion Feature -->
+      <div class="ai-suggestion">
+        <h3>Need Inspiration? <span class="gold">Get AI Recommendations</span></h3>
+        <div class="ai-form">
+          <select id="room-type" aria-label="Select room type">
+            <option value="">Select Room Type</option>
+            <option value="living">Living Room</option>
+            <option value="bedroom">Bedroom</option>
+            <option value="office">Office Space</option>
+            <option value="kitchen">Kitchen</option>
+            <option value="dining">Dining Area</option>
+          </select>
+          <select id="style-preference" aria-label="Select design style">
+            <option value="">Select Style</option>
+            <option value="modern">Modern</option>
+            <option value="classic">Classic</option>
+            <option value="minimalist">Minimalist</option>
+            <option value="luxury">Luxury</option>
+            <option value="african">African Contemporary</option>
+          </select>
+          <button id="ai-recommend" class="btn btn-small">Get Recommendations</button>
+        </div>
+      </div>
+      
+      <!-- Portfolio Filters -->
+      <div class="portfolio-filters" role="group" aria-label="Portfolio filters">
+        <button class="filter-btn active" data-filter="all">All Projects</button>
+        <button class="filter-btn" data-filter="living">Living Rooms</button>
+        <button class="filter-btn" data-filter="bedroom">Bedrooms</button>
+        <button class="filter-btn" data-filter="office">Office Spaces</button>
+        <button class="filter-btn" data-filter="kitchen">Kitchens</button>
+        <button class="filter-btn" data-filter="dining">Dining Areas</button>
+        <button class="filter-btn" data-filter="luxury">Luxury Projects</button>
+      </div>
+      
+      <!-- Portfolio Grid -->
+      <div class="portfolio-grid" id="portfolio-grid">
+        <!-- Portfolio items will be populated by JavaScript -->
+      </div>
+      
+      <div class="cta-section">
+        <p>Ready to transform your space?</p>
+        <a href="#contact" class="btn btn-primary">Start Your Project</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="section services-section" aria-label="Our Services">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Our <span class="gold">Services</span></h2>
+        <p class="section-subtitle">Comprehensive interior design solutions tailored to your vision</p>
+      </div>
+      
+      <div class="services-grid">
+        <div class="service-card animate-card">
+          <div class="service-icon">
+            <i class="fas fa-palette"></i>
+          </div>
+          <h3>Full Interior Design</h3>
+          <p>End-to-end interior design from concept to completion. We handle every detail for a seamless experience.</p>
+          <ul class="service-features">
+            <li>Space Planning</li>
+            <li>Material Selection</li>
+            <li>3D Visualization</li>
+            <li>Project Management</li>
+          </ul>
+        </div>
+        
+        <div class="service-card animate-card" data-delay="100">
+          <div class="service-icon">
+            <i class="fas fa-comments"></i>
+          </div>
+          <h3>Design Consultation</h3>
+          <p>Expert advice to guide your design decisions. Perfect for DIY enthusiasts needing professional direction.</p>
+          <ul class="service-features">
+            <li>Style Assessment</li>
+            <li>Furniture Layout</li>
+            <li>Color Scheme Advice</li>
+            <li>Budget Planning</li>
+          </ul>
+        </div>
+        
+        <div class="service-card animate-card" data-delay="200">
+          <div class="service-icon">
+            <i class="fas fa-couch"></i>
+          </div>
+          <h3>Furniture Styling</h3>
+          <p>Curated furniture selection and arrangement to maximize comfort, functionality, and aesthetic appeal.</p>
+          <ul class="service-features">
+            <li>Custom Furniture</li>
+            <li>Accessory Selection</li>
+            <li>Lighting Design</li>
+            <li>Textile Coordination</li>
+          </ul>
+        </div>
+        
+        <div class="service-card animate-card" data-delay="300">
+          <div class="service-icon">
+            <i class="fas fa-hammer"></i>
+          </div>
+          <h3>Renovation Guidance</h3>
+          <p>Complete support for renovation projects, ensuring design integrity throughout the transformation process.</p>
+          <ul class="service-features">
+            <li>Contractor Coordination</li>
+            <li>Material Sourcing</li>
+            <li>Quality Control</li>
+            <li>Timeline Management</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="section about-section" aria-label="About Us">
+    <div class="container">
+      <div class="about-content">
+        <div class="about-text">
+          <h2 class="section-title">Crafting <span class="gold">Excellence</span> in Every Space</h2>
+          <p>Founded in Enugu, Deexcellentcrib has been transforming ordinary spaces into extraordinary living experiences. Our philosophy centers on creating environments that reflect personality while maximizing comfort and functionality.</p>
+          <div class="stats-grid">
+            <div class="stat-item">
+              <h3 class="stat-number" data-count="150">0</h3>
+              <p>Projects Completed</p>
+            </div>
+            <div class="stat-item">
+              <h3 class="stat-number" data-count="98">0</h3>
+              <p>Client Satisfaction</p>
+            </div>
+            <div class="stat-item">
+              <h3 class="stat-number" data-count="5">0</h3>
+              <p>Years Experience</p>
+            </div>
+          </div>
+          <a href="#contact" class="btn btn-primary">Work With Us</a>
+        </div>
+        <div class="about-image">
+          <img src="assets/images/team/design-team.jpg" alt="Deexcellentcrib design team" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blog/Inspiration Section -->
+  <section id="blog" class="section blog-section" aria-label="Design Inspiration">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Design <span class="gold">Inspiration</span></h2>
+        <p class="section-subtitle">Latest trends, tips, and transformation stories</p>
+      </div>
+      
+      <div class="blog-grid">
+        <article class="blog-card">
+          <div class="blog-image">
+            <img src="assets/images/blog/trends-2026.jpg" alt="Interior Design Trends 2026" loading="lazy">
+          </div>
+          <div class="blog-content">
+            <span class="blog-category">Trends</span>
+            <h3>Top Interior Design Trends for 2026</h3>
+            <p>Discover the emerging styles that will define luxury living in the coming year.</p>
+            <a href="blog/interior-trends-2026.html" class="read-more">Read Article →</a>
+          </div>
+        </article>
+        
+        <article class="blog-card">
+          <div class="blog-image">
+            <img src="assets/images/blog/before-after.jpg" alt="Before and After Transformation" loading="lazy">
+          </div>
+          <div class="blog-content">
+            <span class="blog-category">Case Study</span>
+            <h3>Modern Minimalist Apartment Makeover</h3>
+            <p>See how we transformed a cramped 3-bedroom into a spacious minimalist haven.</p>
+            <a href="blog/before-after-guide.html" class="read-more">Read Article →</a>
+          </div>
+        </article>
+        
+        <article class="blog-card">
+          <div class="blog-image">
+            <img src="assets/images/blog/color-guide.jpg" alt="Color Psychology Guide" loading="lazy">
+          </div>
+          <div class="blog-content">
+            <span class="blog-category">Guide</span>
+            <h3>Color Psychology in Interior Design</h3>
+            <p>Learn how different colors affect mood and perception in living spaces.</p>
+            <a href="blog/color-psychology.html" class="read-more">Read Article →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="section contact-section" aria-label="Contact Us">
+    <div class="container">
+      <div class="contact-wrapper">
+        <div class="contact-info">
+          <h2 class="section-title">Let's Create <span class="gold">Together</span></h2>
+          <p>Ready to transform your space? Reach out for a consultation.</p>
+          
+          <div class="contact-methods">
+            <div class="contact-item">
+              <i class="fas fa-phone"></i>
+              <div>
+                <h4>Call Us</h4>
+                <a href="tel:+2348156792070">+234 815 679 2070</a>
+              </div>
+            </div>
+            
+            <div class="contact-item">
+              <i class="fab fa-whatsapp"></i>
+              <div>
+                <h4>WhatsApp</h4>
+                <a href="https://wa.me/2348156792070" target="_blank">Chat Instantly</a>
+              </div>
+            </div>
+            
+            <div class="contact-item">
+              <i class="fas fa-envelope"></i>
+              <div>
+                <h4>Email</h4>
+                <a href="mailto:info@deexcellentcrib.com">info@deexcellentcrib.com</a>
+              </div>
+            </div>
+            
+            <div class="contact-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <div>
+                <h4>Location</h4>
+                <p>Enugu, Nigeria</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="whatsapp-cta">
+            <a href="https://wa.me/2348156792070" class="whatsapp-btn-large" target="_blank">
+              <i class="fab fa-whatsapp"></i>
+              <span>Start Your Project on WhatsApp</span>
+            </a>
+          </div>
+        </div>
+        
+        <div class="contact-form-container">
+          <form id="leadForm" class="contact-form" aria-label="Contact form">
+            <h3>Send a Message</h3>
+            
+            <div class="form-group">
+              <label for="name">Full Name *</label>
+              <input type="text" id="name" name="name" required aria-required="true">
+            </div>
+            
+            <div class="form-group">
+              <label for="email">Email Address *</label>
+              <input type="email" id="email" name="email" required aria-required="true">
+            </div>
+            
+            <div class="form-group">
+              <label for="phone">Phone/WhatsApp</label>
+              <input type="tel" id="phone" name="phone">
+            </div>
+            
+            <div class="form-group">
+              <label for="service">Service Interested In *</label>
+              <select id="service" name="service" required aria-required="true">
+                <option value="">Select a Service</option>
+                <option value="full-design">Full Interior Design</option>
+                <option value="consultation">Design Consultation</option>
+                <option value="furniture">Furniture Styling</option>
+                <option value="renovation">Renovation Guidance</option>
+                <option value="other">Other Inquiry</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="project-details">Project Details</label>
+              <textarea id="project-details" name="project-details" rows="4" placeholder="Tell us about your space and vision..."></textarea>
+            </div>
+            
+            <div class="form-group">
+              <label for="budget">Estimated Budget</label>
+              <select id="budget" name="budget">
+                <option value="">Select Budget Range</option>
+                <option value="500k-1m">₦500,000 - ₦1,000,000</option>
+                <option value="1m-3m">₦1,000,000 - ₦3,000,000</option>
+                <option value="3m-5m">₦3,000,000 - ₦5,000,000</option>
+                <option value="5m+">₦5,000,000+</option>
+              </select>
+            </div>
+            
+            <button type="submit" class="btn btn-primary btn-block">
+              <span class="btn-text">Send Message</span>
+              <i class="fas fa-paper-plane"></i>
+            </button>
+            
+            <div class="form-notice">
+              <p>We'll respond within 24 hours</p>
+            </div>
+          </form>
+          
+          <div id="formSuccess" class="form-success" hidden>
+            <i class="fas fa-check-circle"></i>
+            <h3>Message Sent Successfully!</h3>
+            <p>Thank you for contacting Deexcellentcrib. We'll get back to you shortly.</p>
+            <button id="sendAnother" class="btn btn-outline">Send Another Message</button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Map Section -->
+      <div class="map-section">
+        <h3>Service Areas in Enugu</h3>
+        <div class="map-container">
+          <div class="map-placeholder" role="img" aria-label="Map of Enugu showing service coverage">
+            <div class="map-overlay">
+              <h4>Covering All of Enugu</h4>
+              <ul>
+                <li>GRA Enugu</li>
+                <li>Independence Layout</li>
+                <li>New Haven</li>
+                <li>Trans-Ekulu</li>
+                <li>Abakpa Nike</li>
+                <li>Emene</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h3>Deexcellent<span class="gold">crib</span></h3>
+          <p>Transforming spaces across Enugu with elegant, functional interior design since 2021.</p>
+          <div class="social-links">
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+            <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+          </div>
+        </div>
+        
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-services">
+          <h4>Our Services</h4>
+          <ul>
+            <li>Full Interior Design</li>
+            <li>Design Consultation</li>
+            <li>Furniture Styling</li>
+            <li>Renovation Guidance</li>
+            <li>Commercial Design</li>
+          </ul>
+        </div>
+        
+        <div class="footer-contact">
+          <h4>Contact Info</h4>
+          <p><i class="fas fa-map-marker-alt"></i> Enugu, Nigeria</p>
+          <p><i class="fas fa-phone"></i> <a href="tel:+2348156792070">+234 815 679 2070</a></p>
+          <p><i class="fas fa-envelope"></i> <a href="mailto:info@deexcellentcrib.com">info@deexcellentcrib.com</a></p>
+          <a href="https://wa.me/2348156792070" class="whatsapp-footer" target="_blank">
+            <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+          </a>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>© 2026 Deexcellentcrib. All rights reserved.</p>
+        <p>Built with excellence by <a href="https://codebrixweb.com" target="_blank" class="developer-link">codebrixweb.com</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <button class="back-to-top" aria-label="Back to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- WhatsApp Floating Button -->
+  <a href="https://wa.me/2348156792070" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+</body>
+</html>

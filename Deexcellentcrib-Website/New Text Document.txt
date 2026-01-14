@@ -1,0 +1,130 @@
+following this mke this into a well-designed website: give me this as a downloadable zip file: Prompt for AI Website Generator / Developer, make it an html5 website and give me as a downloadable zip file, Add portfolio filters + animations, also create other files that ain't here
+
+Add WhatsApp API(08156792070) + contact form , also add my company website (codebrixweb.com) in all the footer 
+
+Create a high-end, responsive, interactive website for Deexcellentcrib, an interior décor company based in Enugu. The website must be modern, elegant, and highly visual, focusing on user experience and lead generation. Ensure it is fully responsive for mobile, tablet, and desktop.
+
+Design Style:
+
+Minimalist but immersive, with a clean, open layout
+
+Elegant color palette: soft neutrals with gold accents or subtle pastel highlights
+
+Smooth animations on hover and scroll
+
+Interactive portfolio gallery with filters by style, room, or project type
+
+Parallax scrolling and subtle micro-interactions
+
+Key Functionalities:
+
+Homepage:
+
+Hero section with full-screen background video/image showcasing top interior projects
+
+Quick introduction about Deexcellentcrib and their philosophy
+
+Call-to-action button: “See Our Work” / “Book a Consultation”
+
+Portfolio / Projects Section:
+
+Grid or masonry layout with project images
+
+Each project opens a detailed project page: before & after images, project description, style, and client testimonial
+
+Filterable by room type (living room, bedroom, office, etc.)
+
+Services Section:
+
+Detailed breakdown of interior décor services: full interior design, consultation, furniture styling, renovation guidance
+
+Icons and short descriptions for each service
+
+About Us Section:
+
+Story of Deexcellentcrib, team, mission, and values
+
+Include team images with subtle animations
+
+Contact / Lead Generation Section:
+
+Fully functional contact form (Name, Email, WhatsApp, Service Interested In)
+
+Direct WhatsApp button for instant connection
+
+Map showing service coverage in Enugu
+
+Blog / Inspiration Section (optional but advanced):
+
+Share tips, interior décor trends, case studies, before & after guides
+
+SEO & Speed Optimized:
+
+Fast loading images (lazy loading), semantic HTML, meta tags, and structured data
+
+Accessible (contrast ratios, ARIA labels, keyboard navigation)
+
+AI Features (optional but unique):
+
+Chatbot for instant design consultation
+
+AI-powered project suggestion: users can input room size/style and get design inspirations
+
+Personalized gallery based on user preferences
+
+Animations & Interactivity:
+
+Smooth fade-in and slide-in effects
+
+Interactive hover effects on portfolio images
+
+Subtle scrolling parallax for depth
+
+Technical Requirements:
+
+Built with React or Next.js for speed and scalability
+
+TailwindCSS or modern CSS for a clean, maintainable design
+
+Fully mobile-first and responsive
+
+Optimized for SEO, speed, and accessibility
+
+Deployment-ready with GitHub integration
+
+Goal: Showcase Deexcellentcrib’s interior décor work in a way no other interior décor site in Enugu has done, combining visual storytelling, interactivity, and lead conversion.
+Deexcellentcrib-Website/
+│
+├── public/                # Static assets (images, videos, icons)
+│   ├── hero-video.mp4
+│   ├── portfolio-images/
+│   └── logo.png
+│
+├── src/
+│   ├── components/        # Reusable UI components
+│   │   ├── Navbar.jsx
+│   │   ├── Footer.jsx
+│   │   ├── PortfolioCard.jsx
+│   │   ├── ServiceCard.jsx
+│   │   └── ContactForm.jsx
+│   │
+│   ├── pages/             # Pages for routing (Next.js or React-Router)
+│   │   ├── index.jsx      # Homepage
+│   │   ├── portfolio.jsx
+│   │   ├── project/[id].jsx  # Dynamic project page
+│   │   ├── services.jsx
+│   │   ├── about.jsx
+│   │   └── contact.jsx
+│   │
+│   ├── styles/            # CSS / Tailwind config
+│   │   └── globals.css
+│   │
+│   ├── utils/             # Helper functions, AI integrations
+│   │   └── chatbot.js
+│   │
+│   └── App.jsx            # Root component
+│
+├── package.json
+├── tailwind.config.js
+├── next.config.js (if using Next.js)
+└── README.md
