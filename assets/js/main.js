@@ -26,128 +26,101 @@ function initLoadingScreen() {
     }, 1000);
 }
 
-// Navigation
+// Navigation: accessible desktop/mobile behaviour with valid in-page destinations.
 function initNavigation() {
     const header = document.querySelector('.header');
+    const navMenu = document.getElementById('navMenu');
+    const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.querySelectorAll('.nav-link');
-    
-    // Update active link on scroll
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            header.style.boxShadow = '0 5px 20px rgba(0,0,0,0.1)';
-        } else {
-            header.style.boxShadow = 'none';
-        }
-        
-        updateActiveNavLink();
-    });
-    
-    function updateActiveNavLink() {
-        const scrollPos = window.scrollY + 100;
-        
-        navLinks.forEach(link => {
-            const href = link.getAttribute('href');
-            if (href && href.startsWith('#')) {
-                const section = document.querySelector(href);
-                if (section) {
-                    const sectionTop = section.offsetTop;
-                    const sectionHeight = section.clientHeight;
-                    
-                    if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
-                        navLinks.forEach(l => l.classList.remove('active'));
-                        link.classList.add('active');
-                    }
-                }
-            }
+    if (!header) return;
+
+    const mobileQuery = window.matchMedia('(max-width: 1100px)');
+
+    function closeMenu() {
+        if (!navMenu || !menuToggle) return;
+        navMenu.classList.remove('active');
+        menuToggle.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.setAttribute('aria-label', 'Open navigation menu');
+        document.body.classList.remove('nav-open');
+        document.body.style.overflow = '';
+    }
+
+    function openMenu() {
+        if (!navMenu || !menuToggle) return;
+        navMenu.classList.add('active');
+        menuToggle.classList.add('active');
+        menuToggle.setAttribute('aria-expanded', 'true');
+        menuToggle.setAttribute('aria-label', 'Close navigation menu');
+        document.body.classList.add('nav-open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    if (menuToggle && navMenu) {
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.contains('active') ? closeMenu() : openMenu();
+        });
+
+        document.addEventListener('click', (event) => {
+            if (navMenu.classList.contains('active') &&
+                !navMenu.contains(event.target) && !menuToggle.contains(event.target)) closeMenu();
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') closeMenu();
+        });
+
+        navLinks.forEach(link => link.addEventListener('click', closeMenu));
+        window.addEventListener('resize', () => {
+            if (!mobileQuery.matches) closeMenu();
         });
     }
-    
-    // Smooth scroll for anchor links
+
+    function updateActiveNavLink() {
+        const scrollPos = window.scrollY + (header.offsetHeight || 80) + 80;
+        let currentSection = 'home';
+        document.querySelectorAll('main section[id], body > section[id], section[id]').forEach(section => {
+            if (scrollPos >= section.offsetTop) currentSection = section.id;
+        });
+        navLinks.forEach(link => {
+            const isActive = link.getAttribute('href') === `#${currentSection}`;
+            link.classList.toggle('active', isActive);
+            if (isActive) link.setAttribute('aria-current', 'location');
+            else link.removeAttribute('aria-current');
+        });
+    }
+
+    let scrollQueued = false;
+    window.addEventListener('scroll', () => {
+        header.classList.toggle('scrolled', window.scrollY > 12);
+        if (!scrollQueued) {
+            window.requestAnimationFrame(() => {
+                updateActiveNavLink();
+                scrollQueued = false;
+            });
+            scrollQueued = true;
+        }
+    }, { passive: true });
+
+    // Account for the fixed header when following section links.
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
+        anchor.addEventListener('click', function(event) {
             const href = this.getAttribute('href');
-            if (href === '#' || !href) return;
-            
+            if (!href || href === '#') return;
             const target = document.querySelector(href);
             if (!target) return;
-            
-            e.preventDefault();
-            
-            const headerHeight = document.querySelector('.header').offsetHeight;
-            const targetPosition = target.offsetTop - headerHeight;
-            
-            window.scrollTo({
-                top: targetPosition,
-                behavior: 'smooth'
-            });
-            
-            // Close mobile menu if open
-            if (window.innerWidth <= 992) {
-                const menuToggle = document.querySelector('.menu-toggle');
-                const navMenu = document.querySelector('.nav-menu');
-                menuToggle.classList.remove('active');
-                navMenu.classList.remove('active');
-            }
+            event.preventDefault();
+            const top = target.getBoundingClientRect().top + window.scrollY - header.offsetHeight - 12;
+            window.scrollTo({ top, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+            if (history.replaceState) history.replaceState(null, '', href);
         });
     });
-    
-    // Dropdown functionality
-    const dropdowns = document.querySelectorAll('.dropdown');
-    dropdowns.forEach(dropdown => {
-        dropdown.addEventListener('mouseenter', () => {
-            if (window.innerWidth > 992) {
-                dropdown.classList.add('active');
-            }
-        });
-        
-        dropdown.addEventListener('mouseleave', () => {
-            if (window.innerWidth > 992) {
-                dropdown.classList.remove('active');
-            }
-        });
-        
-        dropdown.addEventListener('click', (e) => {
-            if (window.innerWidth <= 992) {
-                e.preventDefault();
-                dropdown.classList.toggle('active');
-            }
-        });
-    });
+
+    updateActiveNavLink();
 }
 
-// Mobile Menu
-function initMobileMenu() {
-    const menuToggle = document.querySelector('.menu-toggle');
-    const navMenu = document.querySelector('.nav-menu');
-    
-    if (!menuToggle || !navMenu) return;
-    
-    menuToggle.addEventListener('click', () => {
-        menuToggle.classList.toggle('active');
-        navMenu.classList.toggle('active');
-        document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
-    });
-    
-    // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
-        if (navMenu.classList.contains('active') && 
-            !navMenu.contains(e.target) && 
-            !menuToggle.contains(e.target)) {
-            menuToggle.classList.remove('active');
-            navMenu.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-    });
-    
-    // Close on Escape key
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && navMenu.classList.contains('active')) {
-            menuToggle.classList.remove('active');
-            navMenu.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-    });
-}
+// Kept as a safe no-op compatibility hook; menu behaviour is managed by initNavigation().
+function initMobileMenu() {}
 
 // Portfolio
 function initPortfolio() {
@@ -160,51 +133,51 @@ function initPortfolio() {
     const portfolioData = [
         {
             id: 1,
-            title: "Modern Luxury Living Room",
+            title: "Warm Contemporary Living Room",
             category: "living",
-            image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            tags: ["Modern", "Luxury"],
-            description: "A spacious living room transformation with custom furniture."
+            image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=900&q=80",
+            tags: ["Inspiration", "Warm neutrals"],
+            description: "An inspiration reference for layered textures, light and comfortable furniture."
         },
         {
             id: 2,
-            title: "Serene Master Bedroom",
+            title: "Serene Bedroom Direction",
             category: "bedroom",
-            image: "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            tags: ["Contemporary", "Calm"],
-            description: "Creating a peaceful retreat with premium textiles."
+            image: "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=900&q=80",
+            tags: ["Inspiration", "Restful"],
+            description: "A reference for a restful palette, soft textures and uncluttered styling."
         },
         {
             id: 3,
-            title: "Executive Office Space",
+            title: "Contemporary Workspace Direction",
             category: "office",
-            image: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            tags: ["Professional", "Modern"],
-            description: "Designing a productive workspace with ergonomic furniture."
+            image: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=80",
+            tags: ["Inspiration", "Workspace"],
+            description: "A reference for a focused workspace with a clear, practical layout."
         },
         {
             id: 4,
-            title: "Contemporary Kitchen",
+            title: "Contemporary Kitchen Direction",
             category: "kitchen",
-            image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            tags: ["Modern", "Functional"],
-            description: "Kitchen renovation with smart storage solutions."
+            image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=900&q=80",
+            tags: ["Inspiration", "Functional"],
+            description: "A reference for clean finishes, useful work surfaces and storage planning."
         },
         {
             id: 5,
-            title: "Elegant Dining Area",
+            title: "Dining Area Inspiration",
             category: "living",
-            image: "https://images.unsplash.com/photo-1580476262798-bddd9f4b7369?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            tags: ["Elegant", "Classic"],
-            description: "Perfect space for entertaining guests."
+            image: "https://images.unsplash.com/photo-1580476262798-bddd9f4b7369?auto=format&fit=crop&w=900&q=80",
+            tags: ["Inspiration", "Gathering"],
+            description: "A reference for a welcoming dining area and considered proportions."
         },
         {
             id: 6,
-            title: "Cozy Family Room",
+            title: "Relaxed Family Living Inspiration",
             category: "living",
-            image: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            tags: ["Cozy", "Family"],
-            description: "Comfortable space for family time."
+            image: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=900&q=80",
+            tags: ["Inspiration", "Comfort"],
+            description: "A reference for a relaxed room with warm materials and comfortable seating."
         }
     ];
     
@@ -217,7 +190,7 @@ function initPortfolio() {
             portfolioItem.className = 'portfolio-item';
             portfolioItem.innerHTML = `
                 <div class="portfolio-image">
-                    <img src="${item.image}" alt="${item.title}" loading="lazy">
+                    <img src="${item.image}" alt="${item.title} inspiration reference" loading="lazy" decoding="async" onerror="this.onerror=null;this.style.display='none';this.parentElement.classList.add('image-unavailable');this.parentElement.setAttribute('aria-label','Image unavailable: '+${JSON.stringify('')}+'${item.title}')">
                 </div>
                 <div class="portfolio-content">
                     <div class="portfolio-tags">
@@ -267,73 +240,29 @@ function initPortfolio() {
     });
 }
 
-// Contact Form
+// Contact Form — creates a WhatsApp message; it does not falsely claim server submission.
 function initContactForm() {
     const contactForm = document.getElementById('contactForm');
     if (!contactForm) return;
-    
-    contactForm.addEventListener('submit', async function(e) {
-        e.preventDefault();
-        
-        // Get form data
-        const formData = {
-            name: document.getElementById('name').value,
-            email: document.getElementById('email').value,
-            phone: document.getElementById('phone').value || 'Not provided',
-            service: document.getElementById('service').value,
-            message: document.getElementById('message').value || 'No message',
-            timestamp: new Date().toISOString()
-        };
-        
-        // Validate
-        if (!formData.name || !formData.email || !formData.service) {
-            showNotification('Please fill in all required fields', 'error');
-            return;
-        }
-        
-        // Show loading
-        const submitBtn = this.querySelector('button[type="submit"]');
-        const originalText = submitBtn.innerHTML;
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-        submitBtn.disabled = true;
-        
-        try {
-            // Simulate API call
-            await new Promise(resolve => setTimeout(resolve, 1500));
-            
-            // Success
-            showNotification('Message sent successfully! We will contact you soon.', 'success');
-            
-            // Create WhatsApp message
-            const whatsappMessage = `New Inquiry from Deexcellentcrib Website:
-            
-Name: ${formData.name}
-Email: ${formData.email}
-Phone: ${formData.phone}
-Service: ${formData.service}
-Message: ${formData.message}
 
-Submitted: ${new Date().toLocaleString()}`;
-            
-            const encodedMessage = encodeURIComponent(whatsappMessage);
-            const whatsappURL = `https://wa.me/2348156792070?text=${encodedMessage}`;
-            
-            // Open WhatsApp after 2 seconds
-            setTimeout(() => {
-                window.open(whatsappURL, '_blank');
-            }, 2000);
-            
-            // Reset form
-            contactForm.reset();
-            
-        } catch (error) {
-            console.error('Error:', error);
-            showNotification('Failed to send message. Please try again.', 'error');
-        } finally {
-            // Reset button
-            submitBtn.innerHTML = originalText;
-            submitBtn.disabled = false;
-        }
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        if (!contactForm.reportValidity()) return;
+
+        const name = document.getElementById('name')?.value.trim() || '';
+        const email = document.getElementById('email')?.value.trim() || '';
+        const phone = document.getElementById('phone')?.value.trim() || 'Not provided';
+        const serviceSelect = document.getElementById('service');
+        const service = serviceSelect?.options[serviceSelect.selectedIndex]?.text || 'Not specified';
+        const message = document.getElementById('message')?.value.trim() || 'No additional details provided.';
+        const status = document.getElementById('formStatus');
+
+        const whatsappMessage = `Hello Deexcellentcrib, I would like to discuss an interior design project.\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nService: ${service}\nWhat I would like to improve: ${message}\n\nPlease let me know the next step.`;
+        const whatsappURL = `https://wa.me/2348156792070?text=${encodeURIComponent(whatsappMessage)}`;
+
+        if (status) status.textContent = 'WhatsApp is opening with your enquiry. Review the message and press Send to contact Deexcellentcrib.';
+        const opened = window.open(whatsappURL, '_blank', 'noopener,noreferrer');
+        if (!opened) window.location.href = whatsappURL;
     });
 }
 
@@ -475,8 +404,9 @@ function initMobileOptimizations() {
             const menuToggle = document.querySelector('.menu-toggle');
             const navMenu = document.querySelector('.nav-menu');
             if (menuToggle && navMenu && navMenu.classList.contains('active')) {
-                menuToggle.classList.remove('active');
-                navMenu.classList.remove('active');
+                if (menuToggle) menuToggle.classList.remove('active');
+                if (navMenu) navMenu.classList.remove('active');
+                document.body.style.overflow = '';
                 document.body.style.overflow = '';
             }
         }, 100);
